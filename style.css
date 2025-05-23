@@ -1,15 +1,22 @@
 :root {
-  --bg: #000000;
-  --text: #e0e0e0;
-  --accent: #3b82f6;
-  --card: #121212;
-}
-
-[data-theme='light'] {
-  --bg: #ffffff;
-  --text: #111827;
+  --bg-color: #ffffff;
+  --text-color: #000000;
   --accent: #3b82f6;
   --card: #f9fafb;
+}
+
+[data-theme="light"] {
+  --bg-color: #ffffff;
+  --text-color: #111827;
+  --card: #f9fafb;
+  --accent: #3b82f6;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --card: #1a1a1a;
+  --accent: #3b82f6;
 }
 
 * {
@@ -21,19 +28,41 @@
 
 html {
   scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   line-height: 1.6;
-  transition: background 0.5s ease, color 0.5s ease;
+  margin: 0;
+  padding: 0;
   position: relative;
   overflow-x: hidden;
   min-height: 100vh;
   opacity: 1;
-  transition: opacity 0.5 ease;
+  transition: background-color 0.3s ease, color 0.3s ease, opacity 0.5s ease;
+}
+
+h1, h2, p, a, li {
+  color: var(--text-color);
+}
+
+header,
+footer,
+.card {
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 8px;
+  background-color: var(--card);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] .card {
+  background-color: #1a1a1a;
+  color: white;
 }
 
 .background-stars {
@@ -51,12 +80,13 @@ body {
   top: 0;
   width: 100%;
   background: var(--card);
-  color: var(--text);
+  color: var(--text-color);
   padding: 1rem 2rem;
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(255 255 255 / 0.05);
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
   display: flex;
   justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -65,6 +95,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
+  position: relative;
 }
 
 .logo {
@@ -81,7 +113,7 @@ body {
 
 .nav-links a,
 #toggle-mode {
-  color: var(--text);
+  color: var(--text-color);
   text-decoration: none;
   background: none;
   border: none;
@@ -95,6 +127,12 @@ body {
   color: var(--accent);
 }
 
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 .section {
   min-height: 100vh;
   padding: 8rem 2rem 4rem;
@@ -104,12 +142,11 @@ body {
 }
 
 .hero {
-  /* No background color so it inherits body bg black */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: var(--text);
+  color: var(--text-color);
 }
 
 .shape-placeholder {
@@ -118,9 +155,7 @@ body {
   margin: 2rem auto;
   border-radius: 50%;
   background-color: var(--card);
-  box-shadow:
-    0 0 12px var(--accent),
-    inset 0 0 12px var(--accent);
+  box-shadow: 0 0 12px var(--accent), inset 0 0 12px var(--accent);
 }
 
 .contact-form {
@@ -140,7 +175,7 @@ body {
   border-radius: 10px;
   font-size: 1rem;
   background-color: var(--card);
-  color: var(--text);
+  color: var(--text-color);
   resize: vertical;
   transition: background-color 0.3s ease;
 }
@@ -148,7 +183,12 @@ body {
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
-  background-color: #2e2e2e;
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  outline: 2px solid var(--accent);
 }
 
 .contact-form button {
@@ -166,17 +206,73 @@ body {
   background-color: #1e40af;
 }
 
-@media (max-width: 768px) {
-  .nav-links {
-    display: none; /* for simplicity */
-  }
+/* Hamburger button dasar */
+.hamburger {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  box-sizing: content-box;
+  z-index: 1100;
 }
 
-/* Animasi */
-#blur-text, #blur-text span {
+.hamburger .bar {
+  width: 100%;
+  height: 2.5px;
+  background-color: var(--text-color);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: 1px;
+}
+
+.hamburger.active .bar:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.hamburger.active .bar:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+.hamburger.active .bar:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+p {
+  font-size: 1rem; /* ukuran normal */
+}
+
+#theme-toggle {
+  font-size: 1.2rem;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+#theme-toggle:hover {
+  background-color: var(--accent);
+  color: white;
+}
+
+/* Animasi blur untuk judul */
+.blur-text,
+.blur-text span {
   font-size: 2rem;
   font-weight: 600;
-  color: white;
+  color: var(--text-color);
   filter: blur(8px);
   opacity: 0;
   transform: translateY(20px);
@@ -184,21 +280,20 @@ body {
   animation-delay: 0.5s;
 }
 
-#blur-text span {
-    display: inline-block;
-    filter: blur(8px);
-    opacity: 0;
-    transform: translateY(20px);
-    animation: blurIn 0.8s forwards;
+.blur-text span {
+  display: inline-block;
+  animation-duration: 0.8s;
 }
 
-#blurtxt {
-    color: white;
-  filter: blur(8px);
+/* Animasi blur untuk paragraf khusus */
+.blur-para {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  filter: blur(6px);
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(10px);
   animation: blurIn 1.5s forwards;
-  animation-delay: 0.5s;
+  animation-delay: 1s;
 }
 
 @keyframes blurIn {
@@ -206,5 +301,32 @@ body {
     filter: blur(0);
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-nav {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 1rem;
+    background: var(--card);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+  }
+
+  .container {
+    justify-content: space-between;
+  }
+
+  .nav-links.active {
+    display: flex;
   }
 }
