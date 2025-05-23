@@ -1,34 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wilson Website</title>
-  <link href="style.css" rel="stylesheet" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wildans Website</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="fade-in">
+    <nav class="navbar">
+      <div class="container">
+        <h1 class="logo">Wildans</h1>
+        <ul class="nav-links">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><button id="toggle-mode">🌙</button></li>
+        </ul>
+      </div>
+    </nav>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="container">
-      <h1 class="logo">Wilson</h1>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
+    <header id="hero" class="section hero">
+      <div class="content">
+        <h2 id="blur-text">Welcome To My Website</h2>
+        <p id="blurtxt">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+          eget eros sed nulla egestas malesuada.
+        </p>
+      </div>
+    </header>
 
-  <!-- Main Content -->
-  <section id="home" class="main-content">
-    <div class="content-center">
-      <a href="https://bento.me/nextson" target="_blank">
-      <img src="client1.jpg" alt="Wilson" class="profile-image zoom-in" />
-      </a>
-      <h3 class="info" id="ftext">Klik Gambar Untuk Info Selengkapnya !</h3>
-    </div>
-  </section>
+    <section id="about" class="section">
+      <div class="content">
+        <div class="shape-placeholder"></div>
+        <h2 id="blur-text">About Me</h2>
+        <p id="blurtxt">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+          vulputate euismod diam.
+        </p>
+      </div>
+    </section>
 
-</body>
+    <section id="skills" class="section">
+      <div class="content">
+        <div class="shape-placeholder"></div>
+        <h2 id="blur-text">Skills</h2>
+        <p id="blurtxt">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
+          et velit eu dolor hendrerit euismod.
+        </p>
+      </div>
+    </section>
+
+    <section id="portfolio" class="section">
+      <div class="content">
+        <div class="shape-placeholder"></div>
+        <h2 id="blur-text">Experience</h2>
+        <p id="blurtxt">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida
+          orci at neque bibendum hendrerit.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="content">
+        <h2 id="blur-text">Contact</h2>
+        <form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          class="contact-form"
+        >
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Your Email" required />
+          <textarea
+            name="message"
+            placeholder="Your Message"
+            required
+          ></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+    <script src="script.js"></script>
+  </body>
 </html>
