@@ -7,48 +7,50 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="fade-in">
+    <canvas
+      id="particleCanvas"
+      style="position: fixed; top: 0; left: 0; z-index: -1"
+    ></canvas>
     <nav class="navbar">
   <div class="container">
     <h1 class="logo">Wildans</h1>
-    <ul class="nav-links">
+    <button
+      id="hamburger-toggle"
+      class="hamburger"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="nav-links"
+    >
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
       <li><a href="#hero">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#gallery">Gallery</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <!-- Pindahkan tombol tema dan hamburger ke sini -->
-    <div class="nav-buttons">
-      <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
-      <button id="hamburger-toggle" class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
-    </div>
   </div>
 </nav>
 
-        <ul class="nav-links" id="nav-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Skills</a></li>
-          <li><a href="#">Portfolio</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </div>
+    <header id="hero" class="section hero scroll-animate">
+      <video autoplay muted loop playsinline class="intro-video">
+        <source src="cust1.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
-    <header id="hero" class="section hero">
-      <div class="content">
-        <h2 id="blur-text">Welcome To My Website</h2>
-        <p id="blurtxt">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          eget eros sed nulla egestas malesuada.
-        </p>
-      </div>
+      <h2 id="blur-text">Welcome To My Website</h2>
+      <p id="blurtxt">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+      </p>
     </header>
 
-    <section id="about" class="section">
+    <div class="glow-particle-divider"></div>
+
+    <section id="about" class="section scroll-animate">
       <div class="content">
         <div class="shape-placeholder"></div>
         <h2 id="blur-text">About Me</h2>
@@ -59,7 +61,9 @@
       </div>
     </section>
 
-    <section id="skills" class="section">
+    <div class="glow-particle-divider"></div>
+
+    <section id="skills" class="section scroll-animate">
       <div class="content">
         <div class="shape-placeholder"></div>
         <h2 id="blur-text">Skills</h2>
@@ -70,7 +74,9 @@
       </div>
     </section>
 
-    <section id="portfolio" class="section">
+    <div class="glow-particle-divider"></div>
+
+    <section id="portfolio" class="section scroll-animate">
       <div class="content">
         <div class="shape-placeholder"></div>
         <h2 id="blur-text">Experience</h2>
@@ -81,7 +87,24 @@
       </div>
     </section>
 
-    <section id="contact" class="section">
+    <div class="glow-particle-divider"></div>
+
+    <section id="gallery" class="section scroll-animate">
+      <div class="circular-gallery">
+        <div class="circle">
+          <!-- item diisi lewat JavaScript -->
+        </div>
+      </div>
+
+      <div id="gallery" class="gallery-text">
+        <h2 id="blur-text">This Is My Gallery</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+      </div>
+    </section>
+
+    <div class="glow-particle-divider"></div>
+
+    <section id="contact" class="section scroll-animate">
       <div class="content">
         <h2 id="blur-text">Contact</h2>
         <form
@@ -101,6 +124,7 @@
         </form>
       </div>
     </section>
+    <div class="glow-particle-divider"></div>
     <script src="script.js"></script>
   </body>
 </html>

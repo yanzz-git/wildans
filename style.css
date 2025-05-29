@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
 :root {
   --bg-color: #ffffff;
   --text-color: #000000;
@@ -27,26 +29,106 @@
 }
 
 html {
-  scroll-behavior: smooth;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  line-height: 1.6;
+  font-family: "Poppins", sans-serif;
+  background-color: #000; /* hitam */
+  color: #f1f5f9;
   margin: 0;
   padding: 0;
-  position: relative;
   overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
   min-height: 100vh;
-  opacity: 1;
-  transition: background-color 0.3s ease, color 0.3s ease, opacity 0.5s ease;
 }
 
-h1, h2, p, a, li {
-  color: var(--text-color);
+/* Container partikel */
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Gaya umum untuk partikel */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: moveParticle 20s linear infinite,
+    changeColor 6s ease-in-out infinite alternate;
+}
+
+#particleCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Animasi gerak partikel */
+@keyframes moveParticle {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+  }
+  100% {
+    transform: translateY(-100vh) translateX(50vw) scale(0.5);
+  }
+}
+
+/* Animasi perubahan warna */
+@keyframes changeColor {
+  0% {
+    background-color: #38bdf8; /* biru muda */
+  }
+  100% {
+    background-color: #1e40af; /* biru tua */
+  }
+}
+
+/* Tambahan glow effect */
+body::before {
+  content: "";
+  position: fixed;
+  top: -20%;
+  left: -20%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(124, 58, 237, 0.25),
+    transparent 70%
+  );
+  z-index: -1;
+  filter: blur(120px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+#particles-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  pointer-events: none;
+}
+
+h1,
+h2,
+p,
+a,
+li {
+  color: #f1f5f9;
 }
 
 header,
@@ -55,8 +137,8 @@ footer,
   padding: 1rem;
   margin: 1rem;
   border-radius: 8px;
-  background-color: var(--card);
-  color: var(--text-color);
+  background-color: #0f172a;
+  color: #f1f5f9;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -79,8 +161,8 @@ footer,
   position: fixed;
   top: 0;
   width: 100%;
-  background: var(--card);
-  color: var(--text-color);
+  background-color: #0f172a;
+  color: #f1f5f9;
   padding: 1rem 2rem;
   z-index: 1000;
   box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
@@ -113,7 +195,7 @@ footer,
 
 .nav-links a,
 #toggle-mode {
-  color: var(--text-color);
+  color: #f1f5f9;
   text-decoration: none;
   background: none;
   border: none;
@@ -139,6 +221,21 @@ footer,
   text-align: center;
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero {
@@ -146,16 +243,22 @@ footer,
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: var(--text-color);
+  color: #f1f5f9;
 }
 
 .shape-placeholder {
-  width: 160px;
-  height: 160px;
-  margin: 2rem auto;
-  border-radius: 50%;
-  background-color: var(--card);
-  box-shadow: 0 0 12px var(--accent), inset 0 0 12px var(--accent);
+  width: 200px;
+  height: 320px;
+  background: linear-gradient(135deg, #00ff99, #00ccff);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.5); /* glow tambahan */
+  border-radius: 20px;
+  margin: 1rem auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.shape-placeholder:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
 }
 
 .contact-form {
@@ -174,8 +277,8 @@ footer,
   border: none;
   border-radius: 10px;
   font-size: 1rem;
-  background-color: var(--card);
-  color: var(--text-color);
+  background-color: #0f172a;
+  color: #f1f5f9;
   resize: vertical;
   transition: background-color 0.3s ease;
 }
@@ -206,56 +309,73 @@ footer,
   background-color: #1e40af;
 }
 
-/* Hamburger button dasar */
+/* Tombol hamburger */
 .hamburger {
-  display: inline-flex;
+  display: none;
   flex-direction: column;
-  justify-content: space-around;
-  width: 24px;
-  height: 24px;
-  background: transparent;
+  gap: 5px;
+  background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
-  box-sizing: content-box;
-  z-index: 1100;
+  z-index: 20;
 }
 
 .hamburger .bar {
-  width: 100%;
-  height: 2.5px;
-  background-color: var(--text-color);
-  border-radius: 2px;
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
   transition: all 0.3s ease;
-  transform-origin: 1px;
 }
 
 .hamburger.active .bar:nth-child(1) {
-  transform: rotate(45deg);
+  transform: rotate(45deg) translate(5px, 5px);
 }
-
 .hamburger.active .bar:nth-child(2) {
   opacity: 0;
-  transform: translateX(20px);
+}
+.hamburger.active .bar:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
-.hamburger.active .bar:nth-child(3) {
-  transform: rotate(-45deg);
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  /* Default: Nav disembunyikan di mobile */
+.nav-links {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  background-color: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  padding: 1rem;
+  border-radius: 10px;
+  z-index: 1000;
 }
 
-.hamburger.active .bar:nth-child(3) {
-  transform: rotate(-45deg);
+/* Saat tombol diklik: tampilkan nav */
+.nav-links.active {
+  display: flex;
+}
+
+.nav-links a {
+  color: black; /* Atau warna kontras lainnya */
+  text-decoration: none;
+  font-size: 18px;
 }
 
 p {
-  font-size: 1rem; /* ukuran normal */
+  font-size: 1rem;
 }
 
 #theme-toggle {
   font-size: 1.2rem;
   background: none;
   border: none;
-  color: var(--text-color);
+  color: #f1f5f9;
   cursor: pointer;
   padding: 4px 8px;
   border-radius: 6px;
@@ -267,28 +387,162 @@ p {
   color: white;
 }
 
-/* Animasi blur untuk judul */
-.blur-text,
-.blur-text span {
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--text-color);
-  filter: blur(8px);
-  opacity: 0;
-  transform: translateY(20px);
-  animation: blurIn 1.5s forwards;
-  animation-delay: 0.5s;
+.intro-video {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.15);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.blur-text span {
-  display: inline-block;
-  animation-duration: 0.8s;
+#gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.circular-gallery {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  perspective: 1000px;
+  overflow: visible;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center; /* memastikan lingkaran di tengah */
+  align-items: center;
+}
+
+.circle {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(
+    -50%,
+    -50%
+  ); /* <== penting: agar gambar benar2 di tengah */
+  width: 180px;
+  height: 260px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  transform-origin: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 12px;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+.item.active {
+  transform: scale(1.2);
+  opacity: 1;
+  z-index: 2;
+}
+
+#blur-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(270deg, #40ffaa, #4079ff, #40ffaa, #4079ff);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradientAnimation 6s ease infinite, shine 2s ease-in-out infinite;
+  text-align: center;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Tambahan style untuk judul dan deskripsi */
+.gallery-text {
+  margin-top: -5px;
+  text-align: center;
+  max-width: 600px;
+  font-family: "Poppins", sans-serif;
+}
+
+.gallery-text h1 {
+  font-weight: 600;
+  font-size: 2.5rem;
+  margin: 0 0 20px;
+  color: #f1f5f9;
+}
+
+.gallery-text p {
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #f1f5f9;
+  margin: 0px;
+}
+
+.glow-particle-divider {
+  position: relative;
+  height: 150px;
+  overflow: hidden;
+}
+
+.glow-line {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  border-top: 10px dashed rgba(0, 255, 255, 0.5);
+  animation: moveRight 5s linear infinite;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+@keyframes moveRight {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
 }
 
 /* Animasi blur untuk paragraf khusus */
 .blur-para {
   font-size: 1.1rem;
-  color: var(--text-color);
+  color: #f1f5f9;
   filter: blur(6px);
   opacity: 0;
   transform: translateY(10px);
@@ -301,6 +555,15 @@ p {
     filter: blur(0);
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-video {
+    max-width: 90%;
+  }
+  .skills-video {
+    max-width: 90%;
   }
 }
 
@@ -329,4 +592,65 @@ p {
   .nav-links.active {
     display: flex;
   }
+}
+
+/* RESPONSIF GALLERY */
+@media (max-width: 1024px) {
+  .circular-gallery {
+    height: 300px;
+  }
+
+  .item {
+    width: 140px;
+    height: 200px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .circular-gallery {
+    flex-direction: column;
+    height: auto;
+    perspective: none;
+  }
+
+  .circle {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    transform: none;
+    position: static;
+  }
+
+  .item {
+    position: static;
+    transform: none !important;
+    margin: 10px;
+    pointer-events: auto;
+    width: 130px;
+    height: 180px;
+    opacity: 1 !important;
+    z-index: 1;
+  }
+
+  .item.active {
+    transform: scale(1.05);
+  }
+}
+
+@media (max-width: 480px) {
+  .item {
+    width: 100px;
+    height: 140px;
+    font-size: 0.8rem;
+  }
+
+  .gallery-text h1 {
+    font-size: 2rem;
+  }
+
+  .gallery-text p {
+    font-size: 1rem;
+  }
+}
 }
