@@ -34,7 +34,7 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-  background-color: #000; /* hitam */
+  background-color: #000;
   color: #f1f5f9;
   margin: 0;
   padding: 0;
@@ -44,7 +44,7 @@ body {
   min-height: 100vh;
 }
 
-/* Container partikel */
+/* Container Partikelnyaa */
 .particles {
   position: absolute;
   top: 0;
@@ -55,7 +55,7 @@ body {
   z-index: -1;
 }
 
-/* Gaya umum untuk partikel */
+/* Style Partikel */
 .particle {
   position: absolute;
   border-radius: 50%;
@@ -74,7 +74,7 @@ body {
   pointer-events: none;
 }
 
-/* Animasi gerak partikel */
+/* Biar Partikel Nya Gerak */
 @keyframes moveParticle {
   0% {
     transform: translateY(0) translateX(0) scale(1);
@@ -84,7 +84,7 @@ body {
   }
 }
 
-/* Animasi perubahan warna */
+/* Animasi Perubahan Warna */
 @keyframes changeColor {
   0% {
     background-color: #38bdf8; /* biru muda */
@@ -94,7 +94,7 @@ body {
   }
 }
 
-/* Tambahan glow effect */
+/* Tambahan glow effect biar makin wow */
 body::before {
   content: "";
   position: fixed;
@@ -250,7 +250,7 @@ footer,
   width: 200px;
   height: 320px;
   background: linear-gradient(135deg, #00ff99, #00ccff);
-  box-shadow: 0 0 30px rgba(0, 255, 255, 0.5); /* glow tambahan */
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
   border-radius: 20px;
   margin: 1rem auto;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -342,7 +342,7 @@ footer,
     display: flex;
   }
 
-  /* Default: Nav disembunyikan di mobile */
+  /* Responsifnya navbar diilangin ditampilan mobile, biar ga terdempet */
 .nav-links {
   display: none;
   flex-direction: column;
@@ -362,7 +362,7 @@ footer,
 }
 
 .nav-links a {
-  color: black; /* Atau warna kontras lainnya */
+  color: black;
   text-decoration: none;
   font-size: 18px;
 }
@@ -417,7 +417,7 @@ p {
   overflow: visible;
   margin-bottom: 20px;
   display: flex;
-  justify-content: center; /* memastikan lingkaran di tengah */
+  justify-content: center;
   align-items: center;
 }
 
@@ -435,7 +435,7 @@ p {
   transform: translate(
     -50%,
     -50%
-  ); /* <== penting: agar gambar benar2 di tengah */
+  );
   width: 180px;
   height: 260px;
   background-size: cover;
@@ -461,18 +461,16 @@ p {
   z-index: 2;
 }
 
-#blur-text {
-  font-size: 2.5rem;
-  font-weight: bold;
-  background: linear-gradient(270deg, #40ffaa, #4079ff, #40ffaa, #4079ff);
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  animation: gradientAnimation 6s ease infinite, shine 2s ease-in-out infinite;
-  text-align: center;
+#home video {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
+
 
 @keyframes gradientAnimation {
   0% {
@@ -539,58 +537,90 @@ p {
   }
 }
 
-/* Animasi blur untuk paragraf khusus */
-.blur-para {
-  font-size: 1.1rem;
-  color: #f1f5f9;
-  filter: blur(6px);
-  opacity: 0;
-  transform: translateY(10px);
-  animation: blurIn 1.5s forwards;
-  animation-delay: 1s;
-}
-
-@keyframes blurIn {
-  to {
-    filter: blur(0);
-    opacity: 1;
-    transform: translateY(0);
+/* RESPONSIF HOME/SAMBUTAN */
+@media (max-width: 1024px) {
+  .hero {
+    text-align: center;
+    padding: 1.5rem 1rem;
   }
-}
 
-@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
   .intro-video {
-    max-width: 90%;
+    max-width: 70%;
+    height: auto;
+    margin: 1rem auto;
   }
-  .skills-video {
-    max-width: 90%;
+
+  .nav-links {
+    gap: 1.25rem;
   }
 }
 
 @media (max-width: 768px) {
-  .mobile-nav {
-    display: flex;
+  .hero {
+    padding: 1.5rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .intro-video {
+    width: 90%;
   }
 
   .nav-links {
-    display: none;
     flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 1rem 0.5rem;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+  }
+
+  .intro-video {
+    width: 100%;
+  }
+
+  .nav-links {
     position: absolute;
     top: 100%;
     right: 1rem;
-    background: var(--card);
+    background-color: #0d1117;
     padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1001;
-  }
-
-  .container {
-    justify-content: space-between;
+    border-radius: 0.5rem;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .nav-links.active {
     display: flex;
+  }
+
+  .hamburger {
+    display: block;
   }
 }
 
@@ -652,5 +682,4 @@ p {
   .gallery-text p {
     font-size: 1rem;
   }
-}
 }

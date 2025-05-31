@@ -1,4 +1,4 @@
-// Smooth scroll and fade transition
+// Smooth Scroll + Animasi Dikit
 function handleSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', e => {
@@ -21,45 +21,7 @@ function handleSmoothScroll() {
   });
 }
 
-// Blur text animation
-function animateBlurText() {
-  const elements = document.querySelectorAll('.blur-text');
-  elements.forEach(element => {
-    const words = element.textContent.trim().split(' ');
-    element.textContent = '';
-    words.forEach((word, i) => {
-      const span = document.createElement('span');
-      span.textContent = word;
-      span.style.cssText = 'filter: blur(8px); opacity: 0; display: inline-block; transform: translateY(20px);';
-      span.style.animation = `blurIn 0.8s forwards`;
-      span.style.animationDelay = `${i * 0.3}s`;
-      element.appendChild(span);
-      if (i < words.length - 1) element.appendChild(document.createTextNode(' '));
-    });
-  });
-}
-
-// Theme toggle
-function setupThemeToggle() {
-  const themeToggle = document.getElementById('theme-toggle');
-  const savedTheme = localStorage.getItem('theme');
-  function updateIcon(theme) {
-    themeToggle.textContent = theme === 'dark' ? '🌙' : '🌞';
-  }
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-  document.documentElement.setAttribute('data-theme', theme);
-  updateIcon(theme);
-  themeToggle.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme');
-    const newTheme = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateIcon(newTheme);
-  });
-}
-
-// Mobile navbar toggle
+// Mobile Navbar Toggle ( Hamburger Button Akan Berfungsi Khusus Tampilan Mobile)
 function setupNavbarToggle() {
   const toggle = document.getElementById('hamburger-toggle');
   const navLinks = document.querySelector('.nav-links');
@@ -70,7 +32,7 @@ function setupNavbarToggle() {
   });
 }
 
-// Circular gallery
+// Circular Gallery Nih
   const gallery = document.querySelector('.circular-gallery');
   if (gallery) {
     const circle = gallery.querySelector('.circle');
@@ -144,7 +106,7 @@ function setupNavbarToggle() {
     positionItems();
   }
 
-// Background particles
+// Background Partikelnya
 const canvas = document.getElementById("particleCanvas");
   const ctx = canvas.getContext("2d");
 
@@ -163,7 +125,7 @@ const canvas = document.getElementById("particleCanvas");
       this.rotation = Math.random() * Math.PI * 2;
       this.rotationSpeed = (Math.random() - 0.5) * 0.01;
       this.colorPhase = Math.random() * Math.PI * 2;
-      this.segments = 6 + Math.floor(Math.random() * 3); // 6-8 potongan
+      this.segments = 6 + Math.floor(Math.random() * 3);
     }
 
     draw(ctx, time) {
@@ -175,7 +137,7 @@ const canvas = document.getElementById("particleCanvas");
       const b = Math.floor(170 + Math.cos(time + this.colorPhase) * 85);
       ctx.strokeStyle = `rgb(${r}, ${g}, ${b})`;
       ctx.lineWidth = 1.5;
-      ctx.shadowBlur = 0; // Tidak ada bayangan
+      ctx.shadowBlur = 0; // Tidak ada bayangan, mau ada bayangan? ganti aja jadi 1 atau lebih
 
       const angleOffset = this.rotation + time * this.rotationSpeed;
 
@@ -189,7 +151,7 @@ const canvas = document.getElementById("particleCanvas");
     }
   }
 
-  const particles = Array.from({ length: 15 }, () => new Particle()); // Lebih sedikit
+  const particles = Array.from({ length: 15 }, () => new Particle());
 
   function animate(time) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -204,8 +166,7 @@ const canvas = document.getElementById("particleCanvas");
 
   animate();
 
-// ✅ Scroll-triggered animation (FIXED)
-// Scroll animation observer
+// Scroll Animate, Biar Scrollnya Ga Ngebosenin
 function setupScrollAnimations() {
   const elements = document.querySelectorAll('.scroll-animate');
 
@@ -213,7 +174,6 @@ function setupScrollAnimations() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        // Comment baris di bawah jika ingin animasi tidak satu kali
         observer.unobserve(entry.target);
       }
     });
@@ -227,7 +187,7 @@ function setupScrollAnimations() {
 document.addEventListener("DOMContentLoaded", () => {
   handleSmoothScroll();
   setupScrollAnimations();
-  setupNavbarToggle(); // ← Tambahkan ini agar hamburger berfungsi
+  setupNavbarToggle();
 });
 
 // Pembatas
@@ -240,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < totalLines; i++) {
       const line = document.createElement('div');
       line.className = 'glow-line';
-      line.style.top = `${i * 0}px`; // Jarak antar garis vertikal (rapat)
+      line.style.top = `${i * 0}px`;
       line.style.animationDelay = `${i * delayStep}s`;
       divider.appendChild(line);
     }
